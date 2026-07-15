@@ -1568,8 +1568,7 @@ var _ = Describe("Edit machinepool",
 					clusterID, mpName, "--replicas", "3",
 					"--enable-autoscaling")
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).Should(ContainSubstring("Autoscaling enabled on machine pool"))
-				Expect(err.Error()).Should(ContainSubstring("can't set replicas"))
+				Expect(err.Error()).Should(ContainSubstring("replicas can't be set when autoscaling is enabled"))
 
 				By("Edit with not-existed cluster id")
 				_, err = machinePoolService.EditMachinePool(
