@@ -664,6 +664,9 @@ var _ = Describe("Edit nodepool",
 				for {
 					lowerVersion, err := versionList.FindNearestBackwardOptionalVersion(lVersion, 1, false)
 					Expect(err).ToNot(HaveOccurred())
+					if lowerVersion == nil {
+						Skip("Skipping as no previous version is available for testing")
+					}
 					lVersion = lowerVersion.Version
 					if lowerVersion.AvailableUpgrades != "" {
 						upgrades := helper.ParseCommaSeparatedStrings(lowerVersion.AvailableUpgrades)
